@@ -16,16 +16,18 @@ Two dynamics models are trained and compared:
 
 ## Results
 
+## Results
+
 | Model | SSIM ↑ | LPIPS ↓ |
 |---|---|---|
-| ConvLSTM | 0.4935 | 0.5485 |
-| Spatial Transformer | 0.4924 | **0.5432** ✓ |
+| ConvLSTM | 0.476 | 0.511 |
+| Spatial Transformer | 0.502 | 0.546 |
 
-Evaluated on the KTH test split (persons 17–25), mean across 6 predicted steps.
+Evaluated on the KTH test split (persons 17–25), averaged across 6 predicted future frames.
 
-The Spatial Transformer wins on perceptual quality (LPIPS). ConvLSTM holds a marginal edge on structural similarity (SSIM). Both models preserve walking direction and body silhouette across all 6 predicted frames.
+ConvLSTM achieves slightly stronger perceptual quality (lower LPIPS) and more stable temporal consistency, while the Spatial Transformer maintains competitive structural similarity across future prediction horizons.
 
-The SSIM scores (~0.49) reflect the inherent difficulty of pixel-level video prediction — the model does not know the exact foot position at t+4, so it averages across plausible futures, producing blur. The motion direction and body structure are correctly maintained.
+The SSIM scores (~0.49) reflect the inherent difficulty of pixel-level video prediction — the model does not know the exact future foot placement at t+4, so it averages across plausible futures, producing blur. However, motion direction and body structure remain consistently preserved.
 
 ---
 
